@@ -21,15 +21,10 @@ series of Prompt objects used to collect the parameters to pass to the handler.
 
     Initializes a command object with the given alias, description and handler.
 
-    - *default_alias*
-      The default alias for the command.  This is the alias shown when the list
+    - *default_alias* The default alias for the command.  This is the alias shown when the list
       of available commands is displayed.
-
-    - *description*
-      A description of the command.
-
-    - *handler*
-      The function to invoke in order to process the desired command.
+    - *description* A description of the command.
+    - *handler* The function to invoke in order to process the desired command.
 
     **`add_alias(alias)`**
 
@@ -37,8 +32,7 @@ series of Prompt objects used to collect the parameters to pass to the handler.
     easier to use.  E.g. Some users prefer quit while others prefer exit, so the
     exit command has both as aliases.
 
-    - *alias*
-      An alias that can be used to invoke the command.
+    - *alias* An alias that can be used to invoke the command.
 
     **`add_parameter(prompt, name=None, cast=None)`**
 
@@ -46,18 +40,13 @@ series of Prompt objects used to collect the parameters to pass to the handler.
     user and a function which converts the input into a data type/structure that
     is appropriate for the handler.  
 
-    - *prompt*
-      The prompt for the user&#146;s input.  Either a Prompt object, a string or
+    - *prompt* The prompt for the user&#146;s input.  Either a Prompt object, a string or
       a parameterless function that returns a string.
-
-    - *name*
-      The name of the parameter.  This needs to match the name of the parameter
+    - *name* The name of the parameter.  This needs to match the name of the parameter
       in the command&#146;s handler function.  If not provided, the value
       returned by the prompt will be passed to the handler in the order it was
       added to the command, before any named parameters.
-
-    - *cast*
-      A function which transforms the string input by the user into a form that
+    - *cast* A function which transforms the string input by the user into a form that
       is recognized by the command&#146;s handler function.  If not provided
       then the default cast is used which simply returns the input string.  If
       *prompt* is a Prompt object then *cast* will be ignored.
@@ -75,17 +64,9 @@ series of Prompt objects used to collect the parameters to pass to the handler.
 
     Create a new Prompt.
 
-    - *prompt*
-      A string, or parameterless function that return a string, with which to
-      prompt the user.
-
-    - *name* - optional
-      The name of the parameter in the Command's handler function for which this
-      prompt provides a value.
-
-    - *cast_fn* - optional
-      A function which transforms the input value into a type/structure
-      recognized by the Command's handler function.
+    - *prompt* A string, or parameterless function that return a string, with which to prompt the user.
+    - *name* (optional) The name of the parameter in the Command's handler function for which this prompt provides a value.
+    - *cast_fn* (optional) A function which transforms the input value into a type/structure recognized by the Command's handler function.
 
     **`prompt()`**
 
@@ -104,16 +85,13 @@ series of Prompt objects used to collect the parameters to pass to the handler.
 
     Create a new, empty shell.
 
-    - *name* - optional
-      An optional name for the shell which will be displayed when the shell is
-      started.
+    - *name* (optional) An optional name for the shell which will be displayed when the shell is started.
 
     **`add_command(command)`**
 
     Add a command to the shell.
 
-    - *command*
-      A Command object.
+    - *command* A Command object.
 
     **`set_global(name, value)`**
 
@@ -122,11 +100,8 @@ series of Prompt objects used to collect the parameters to pass to the handler.
     value, then the value input for the parameter's prompt will override the
     global value with the same name for that command invocation.
 
-    - *name*
-      The name of the global value.
-
-    - *value*
-      The value to assign to the given name.
+    - *name* The name of the global value.
+    - *value* The value to assign to the given name.
 
     **`start()`**
 
@@ -134,6 +109,7 @@ series of Prompt objects used to collect the parameters to pass to the handler.
     using any of its aliases.
 
  * * *
+
 ## cmdlnprompt.py
 
 cmdlnprompt.py provides a set of common prompts.
