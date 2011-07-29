@@ -8,7 +8,6 @@
    
     This is another paragraph of text inside of the list item.
     It is very useful
-
     - This is a second nested list 1st item
     - This is a second nested list 2nd item
 
