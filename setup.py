@@ -1,7 +1,7 @@
 from distutils.core import setup
 
 setup(
-    name = 'Command line UI',
+    name = 'cmdlnui',
     packages = ['cmdlnui'],
     version='0.1',
     description = "Command Line UI Builder",
