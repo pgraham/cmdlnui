@@ -1,9 +1,9 @@
 ##
 ## This module provides some standard prompts and cast functions
 ##
-import Prompt from cmdlnui
-import date from datetime
-import timedelta from datetime
+from cmdlnui import Prompt
+from datetime import date
+from datetime import timedelta
 
 ##
 ## Standard date prompt

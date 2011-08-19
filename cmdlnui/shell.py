@@ -201,6 +201,7 @@ class Shell(object):
         """
         if self.name is not None:
             print("You have entered the " + self.name)
+            print("Type 'cmds' to see the list of available commands")
 
         show = Command('commands', 'Show available commands', self._show)
         show.add_alias('cmds')
