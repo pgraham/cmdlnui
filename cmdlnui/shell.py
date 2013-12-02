@@ -16,21 +16,21 @@ class Command(object):
     handler function.
     """
 
-    def __init__(self, default_alias, description, handler):
+    def __init__(self, defaultAlias, description, handler):
         """Inits a Command object with the given alias, description and handler.
         Args:
-            default_alias: The default alias for the command.
+            defaultAlias: The default alias for the command.
             description: A description of the command.
             handler: Function to invoke to perform the described command
         """
         self.aliases = []
         self.params = []
 
-        self.aliases.append(default_alias)
+        self.aliases.append(defaultAlias)
         self.desc = description
         self.fn = handler
 
-    def add_alias(self, alias):
+    def addAlias(self, alias):
         """Add an alias that can be used to invoke the command.
 
         Aliases can be added to Commands in order to make the UI more intuitive,
@@ -45,7 +45,7 @@ class Command(object):
         self.aliases.append(alias)
         return self
 
-    def add_parameter(self, prompt, name=None, cast=None):
+    def addParameter(self, prompt, name=None, cast=None):
         """Adds a parameter to pass to the command handler.
 
         Parameters are stored as Prompt objects which consist of a message to
@@ -90,19 +90,19 @@ class Command(object):
 
         Returns: self
         """
-        unnamed_args = []
-        named_args = {}
+        unnamedArgs = []
+        namedArgs = {}
         if globals is not None:
             for k, v in globals.items():
-                named_args[k] = v
+                namedArgs[k] = v
 
         for prompt in self.params:
             if prompt.name is not None:
-                named_args[prompt.name] = prompt.prompt()
+                namedArgs[prompt.name] = prompt.prompt()
             else:
-                unnamed_args.append(prompt.prompt())
+                unnamedArgs.append(prompt.prompt())
 
-        self.fn(*unnamed_args, **named_args)
+        self.fn(*unnamedArgs, **namedArgs)
         return self
 
 class InvalidCommand(Exception):
@@ -130,20 +130,20 @@ class Prompt(object):
     which returns a string.
     """
     
-    def __init__(self, prompt, name, cast_fn):
+    def __init__(self, prompt, name=None, cast=None):
         """Create a new prompt.
 
         Args:
             prompt: A string or a parameterless function that returns a string
             name: The name of the parameter for which the prompt provides a
                 value
-            cast_fn: A function which takes a single paramter, the string input
+            cast: A function which takes a single paramter, the string input
                 by the user, and returns a value of the appropriate type for the
                 parameter to which the value is assigned.
         """
         self.prmt = prompt
         self.name = name
-        self.fn = cast_fn
+        self.fn = cast
 
     def prompt(self):
         """Prompt the user for input and return the cast value.
@@ -176,7 +176,7 @@ class Shell(object):
         self.name = name
         self.globals = {}
         
-    def add_command(self, command):
+    def addCommand(self, command):
         """Add the given command to the shell.
 
         Args:
@@ -184,7 +184,7 @@ class Shell(object):
         """
         self.cmds.append(command)
 
-    def set_global(self, name, value):
+    def setGlobal(self, name, value):
         """Set a value that is passed in with the dictionary values to each
         command invocation.  A command parameter prompt with the same name will
         override a global value.
@@ -196,7 +196,7 @@ class Shell(object):
         self.globals[name] = value
         
     def start(self):
-        """Continuously prompt the user for commands until the invoke the quit
+        """Continuously prompt the user for commands until they invoke the quit
         command using either the 'quit' or 'exit' alias.
         """
         if self.name is not None:
@@ -204,29 +204,29 @@ class Shell(object):
             print("Type 'cmds' to see the list of available commands")
 
         show = Command('commands', 'Show available commands', self._show)
-        show.add_alias('cmds')
-        show.add_alias('show commands')
-        self.add_command(show)
+        show.addAlias('cmds')
+        show.addAlias('show commands')
+        self.addCommand(show)
 
         quit = Command('quit', 'Quit', self._quit)
-        quit.add_alias('exit')
-        self.add_command(quit)
+        quit.addAlias('exit')
+        self.addCommand(quit)
 
         self.again = True
         while self.again:
             cmd = input(' # ')
 
-            found_cmd = False
+            foundCmd = False
             for command in self.cmds:
                 if cmd in command.aliases:
-                    found_cmd = True
+                    foundCmd = True
                     try:
                         command.invoke(self.globals)
                         break
                     except InvalidCommand as e:
                         print(e.message)
 
-            if not found_cmd:
+            if not foundCmd:
                 print("Invalid command: ", cmd)
 
     def _quit(self, **globals):
