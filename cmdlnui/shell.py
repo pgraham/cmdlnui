@@ -142,6 +142,9 @@ class Prompt(object):
                 by the user, and returns a value of the appropriate type for the
                 parameter to which the value is assigned.
         """
+        if cast is None:
+            cast = lambda x: x
+
         self.prmt = prompt
         self.name = name
         self.fn = cast
