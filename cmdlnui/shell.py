@@ -97,10 +97,11 @@ class Command(object):
                 namedArgs[k] = v
 
         for prompt in self.params:
+            val = prompt.prompt(*unnamedArgs, **namedArgs)
             if prompt.name is not None:
-                namedArgs[prompt.name] = prompt.prompt()
+                namedArgs[prompt.name] = val
             else:
-                unnamedArgs.append(prompt.prompt())
+                unnamedArgs.append(val)
 
         self.fn(*unnamedArgs, **namedArgs)
         return self
@@ -145,14 +146,14 @@ class Prompt(object):
         self.name = name
         self.fn = cast
 
-    def prompt(self):
+    def prompt(self, *args, **kwargs):
         """Prompt the user for input and return the cast value.
 
         Returns: the value input by the user after it has been passed through
             any provided cast function.
         """
-            inpt = input(self.prmt())
         if isinstance(self.prmt, collections.Callable):
+            inpt = input(self.prmt(*args, **kwargs))
         else:
             inpt = input(self.prmt)
 
