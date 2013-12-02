@@ -5,7 +5,7 @@ are added.  Command objects consist of a description, one or more aliases for
 invoking the command, a handler function for executing the command and a series
 of Prompt objects used to collect the parameters to pass to the handler.
 """
-import types
+import collections
 
 class Command(object):
     """This class encapsulates a command that can be invoked from the main
@@ -151,8 +151,8 @@ class Prompt(object):
         Returns: the value input by the user after it has been passed through
             any provided cast function.
         """
-        if isinstance(self.prmt, types.FunctionType):
             inpt = input(self.prmt())
+        if isinstance(self.prmt, collections.Callable):
         else:
             inpt = input(self.prmt)
 
