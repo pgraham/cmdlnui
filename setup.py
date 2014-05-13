@@ -3,7 +3,7 @@ from distutils.core import setup
 setup(
     name = 'cmdlnui',
     packages = ['cmdlnui'],
-    version='0.4',
+    version='0.5',
     description = "Command Line UI Builder",
     author = "Philip Graham",
     author_email = "philip@zeptech.ca",

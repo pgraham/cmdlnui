@@ -229,9 +229,9 @@ class Shell(object):
                         break
                     except InvalidCommand as e:
                         print(e.message)
-                    except Exception as e:
-                        print('An unexpected condition was encountered'
-                              'processing your command: ' + e.message)
+                   # except Exception as e:
+                   #     print('An unexpected condition was encountered '
+                   #           'processing your command: {}'.format(e))
 
             if not foundCmd:
                 print("Invalid command: ", cmd)

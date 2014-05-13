@@ -8,6 +8,14 @@ to collect the parameters to pass to the handler.
 
  * * *
 
+## Usage
+
+```
+from cmdlnui.shell import Shell
+
+s = Shell('Amazading!')
+```
+
 ## API
 
 ### Command

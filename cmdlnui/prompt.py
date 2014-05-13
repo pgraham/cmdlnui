@@ -1,7 +1,7 @@
 ##
 ## This module provides some standard prompts and cast functions
 ##
-from cmdlnui import Prompt
+from cmdlnui.shell import Prompt
 from datetime import date
 from datetime import timedelta
 
@@ -11,7 +11,7 @@ from datetime import timedelta
 class DatePrompt(Prompt):
 
     def __init__(self):
-        Prompt.__init__(self, 'Date (yyyy-dd-mm):', strtodate)
+        Prompt.__init__(self, 'Date (yyyy-dd-mm):', cast=self.strtodate)
 
     def strtodate(self, str):
         parts = str.split('-')
@@ -23,7 +23,7 @@ class DatePrompt(Prompt):
 class TimeDeltaPrompt(Prompt):
 
     def __init__(self):
-        Prompt.__init__(self, 'Time (#w #d hh:mm:ss.micro):', strtodelta)
+        Prompt.__init__(self, 'Time (#w #d hh:mm:ss.micro):', cast=self.strtodelta)
 
     def strtodelta(self, str):
         args = {}
